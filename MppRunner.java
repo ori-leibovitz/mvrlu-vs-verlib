@@ -18,7 +18,7 @@
 public class MppRunner {
 
     // ---- knobs (edit here, recompile, re-upload) ----
-    private static final String[] IMPLS = { "coarse", "mvrlu" };
+    private static final String[] IMPLS = { "coarse", "mvrlu", "vcas" };
     private static final int SECONDS_PER_PHASE = 20;
     private static final int KEY_RANGE = 128;   // narrow on purpose: contention
     private static final long SEED = 42L;
@@ -44,8 +44,8 @@ public class MppRunner {
         }
 
         System.out.println();
-        System.out.println(allOk ? "##### DAY-1 ACCEPTANCE: PASSED #####"
-                                 : "##### DAY-1 ACCEPTANCE: FAILED #####");
+        System.out.println(allOk ? "##### STRESS ACCEPTANCE: PASSED #####"
+                                 : "##### STRESS ACCEPTANCE: FAILED #####");
         System.out.println("=== RUN COMPLETE ===");
     }
 }
