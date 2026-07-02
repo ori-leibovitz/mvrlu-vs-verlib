@@ -18,7 +18,7 @@
 public class MppRunner {
 
     // ---- knobs (edit here, recompile, re-upload) ----
-    private static final String[] IMPLS = { "coarse" };
+    private static final String[] IMPLS = { "coarse", "mvrlu" };
     private static final int SECONDS_PER_PHASE = 20;
     private static final int KEY_RANGE = 128;   // narrow on purpose: contention
     private static final long SEED = 42L;
