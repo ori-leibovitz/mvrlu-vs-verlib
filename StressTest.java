@@ -51,9 +51,11 @@ public final class StressTest {
     // ---------------------------------------------------------------
     static VersionedSet create(String name) {
         switch (name) {
-            case "coarse": return new CoarseLockList();
-            case "mvrlu":  return new MvRluList();
-            case "vcas":   return new VcasList();
+            case "coarse":     return new CoarseLockList();
+            case "mvrlu":      return new MvRluList();
+            case "vcas":       return new VcasList();
+            case "mvrlu-tree": return new MvRluTree();
+            case "vcas-tree":  return new VcasTree();
             default: throw new IllegalArgumentException("unknown impl: " + name);
         }
     }

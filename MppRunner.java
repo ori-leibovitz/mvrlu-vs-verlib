@@ -19,10 +19,10 @@ public class MppRunner {
 
     // ---- MODE: "stress" (correctness acceptance) or "bench" (Day 3
     // measurement matrix, ~10-11 min). Edit, recompile, re-upload. ----
-    private static final String MODE = "bench";
+    private static final String MODE = "stress";
 
     // ---- stress knobs ----
-    private static final String[] IMPLS = { "coarse", "mvrlu", "vcas" };
+    private static final String[] IMPLS = { "coarse", "mvrlu", "vcas", "mvrlu-tree", "vcas-tree" };
     private static final int SECONDS_PER_PHASE = 20;
     private static final int KEY_RANGE = 128;   // narrow on purpose: contention
     private static final long SEED = 42L;

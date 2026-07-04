@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public final class Benchmark {
 
     // ---- experiment matrix (edit + recompile to trim) ----
-    static final String[] IMPLS   = { "coarse", "mvrlu", "vcas" };
+    static final String[] IMPLS   = { "coarse", "mvrlu", "vcas", "mvrlu-tree", "vcas-tree" };
     static final int[]    THREADS = { 1, 8, 32, 64 };
     static final int[]    SIZES   = { 1024, 16384 };
     static final int      REPS        = 3;
@@ -75,7 +75,7 @@ public final class Benchmark {
 
     /** quick=true: tiny matrix for local plumbing checks only. */
     public static void runAll(boolean quick) throws Exception {
-        String[] impls  = quick ? new String[]{"coarse", "mvrlu", "vcas"} : IMPLS;
+        String[] impls  = IMPLS;
         int[] threadsAx = quick ? new int[]{2} : THREADS;
         int[] sizesAx   = quick ? new int[]{256} : SIZES;
         int reps        = quick ? 1 : REPS;
@@ -125,9 +125,15 @@ public final class Benchmark {
         final VersionedSet set = StressTest.create(impl);
         final int keyRange = 2 * size;
 
-        // Deterministic 50%-density prefill.
+        // Deterministic 50%-density prefill, in SHUFFLED order: ascending
+        // insertion would degenerate the external BSTs into linear chains
+        // (depth ~size instead of ~2*log2), poisoning both performance and
+        // comparability. Shuffle is seeded => still fully reproducible.
         Random pre = new Random(SEED);
-        for (int k = 0; k < keyRange; k++) if (pre.nextBoolean()) set.insert(k);
+        java.util.ArrayList<Integer> keys = new java.util.ArrayList<Integer>(keyRange);
+        for (int k = 0; k < keyRange; k++) if (pre.nextBoolean()) keys.add(k);
+        java.util.Collections.shuffle(keys, pre);
+        for (int i = 0; i < keys.size(); i++) set.insert(keys.get(i));
 
         final AtomicBoolean stop = new AtomicBoolean(false);
         final CyclicBarrier start = new CyclicBarrier(threads + 1);
