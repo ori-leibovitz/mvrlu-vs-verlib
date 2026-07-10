@@ -1,24 +1,8 @@
-/**
- * Entry point for the college multicore server (same batch flow as the
- * course homework: upload ALL .class files, the server invokes
- * MppRunner.main() with no args, output lands in mpp.out).
- *
- * TONIGHT (Day 1): stress-test acceptance run on the coarse-lock oracle,
- * at two thread counts. A clean run here officially closes Day 1.
- *
- * DAY 2: change IMPLS to {"coarse","mvrlu"} then {"coarse","mvrlu","vcas"}
- * and re-upload after every implementation milestone.
- *
- * DAY 3: this class also becomes the benchmark driver (add the benchmark
- * loop below the stress section, or gate with a MODE constant).
- *
- * Tune SECONDS_PER_PHASE to the server's job time limit — with the
- * defaults below: 2 configs x 3 phases x 20s = ~2 minutes total.
- */
+
 public class MppRunner {
 
-    // ---- MODE: "stress" (correctness acceptance) or "bench" (Day 3
-    // measurement matrix, ~10-11 min). Edit, recompile, re-upload. ----
+    // ---- MODE: "stress" (correctness acceptance) or "bench" 
+    
     private static final String MODE = "stress";
 
     // ---- stress knobs ----

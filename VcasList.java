@@ -22,8 +22,8 @@ import java.util.concurrent.locks.ReentrantLock;
  *    reads the counter and tries ONE CAS increment (failure is fine --
  *    someone else advanced it). Writers only READ the camera when
  *    stamping. This is the exact opposite of (our) MV-RLU, where every
- *    commit increments the global clock -- the asymmetry design-decision
- *    E1 predicts the benchmarks will expose.
+ *    commit increments the global clock -- 
+ *    the benchmarks are designed to expose.
  *    Why it works: a snapshot that obtained ts=T bumped the camera to
  *    T+1, so any version stamped after the bump gets >= T+1 and is
  *    excluded; a version stamped T (from a pre-bump camera read)
@@ -36,7 +36,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *    lock-freedom -- part of vCAS's identity -- in exchange for
  *    structural symmetry with MvRluList: same locks, same traversal,
  *    same cooperative GC. That isolates the versioning mechanism as the
- *    ONLY experimental variable (design doc E4). Note verlib itself
+ *    ONLY experimental variable (the fair-comparison principle). Note verlib itself
  *    supports lock-based structures, so this stays inside its scope.
  *    The lock also means a pointer's install cannot race another install
  *    on the SAME pointer, but stamping still races readers/snapshots --
@@ -53,7 +53,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * CONSISTENCY: snapshot queries here are linearizable (the vCAS
  * guarantee), unlike MvRluList's snapshot-isolation-style behavior --
- * design doc E2's asymmetry, worth a sentence in the report.
+ * a deliberate, documented asymmetry between the two approaches.
  */
 public final class VcasList implements VersionedSet, Validatable {
 

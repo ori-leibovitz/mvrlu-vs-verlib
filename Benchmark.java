@@ -4,7 +4,7 @@ import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Day-3 benchmark driver. Measures throughput across the experiment
+ * Benchmark driver. Measures throughput across the experiment
  * matrix from the project plan:
  *
  *   implementations x thread counts x workload mixes x structure sizes,

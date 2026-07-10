@@ -40,14 +40,14 @@ import java.util.concurrent.atomic.AtomicReference;
  *   java StressTest [implName] [writerThreads] [secondsPerPhase] [keyRange] [seed]
  * Defaults: coarse 8 15 128 42
  *
- * Acceptance bar for tonight: a clean run on 'coarse' with 8+ threads.
+ * Acceptance bar: a clean run on 'coarse' with 8+ threads.
  * If this harness flags the coarse-lock baseline, the bug is in the
- * harness — fix it TONIGHT, before it is trusted on Day 2.
+ * harness — fix the harness before it is trusted on the versioned implementations.
  */
 public final class StressTest {
 
     // ---------------------------------------------------------------
-    // Implementation registry — add MvRluList / VcasList here on Day 2.
+    // Implementation registry.
     // ---------------------------------------------------------------
     static VersionedSet create(String name) {
         switch (name) {

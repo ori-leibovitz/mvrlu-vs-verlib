@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * MV-RLU-simplified sorted linked list (Kim et al., ASPLOS 2019).
  *
- * MAPPING TO THE PAPER (and to design-decisions.md):
+ * MAPPING TO THE PAPER (and to the report's simplification table):
  *  - The only mutable field of a list node is its next pointer, so a
  *    node's "version chain" is a chain of Version records, each holding
  *    a next value and a final commitTs, newest first.
@@ -29,7 +29,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *    pruning pass (no background gp-detector thread).
  *  - M5: "reclamation" = cutting the .older link; the JVM collects.
  *
- * THE GC / READER RACE AND ITS FIX (the subtle part -- whiteboard-ready):
+ * THE GC / READER RACE AND ITS FIX (the subtle part):
  *  A snapshot reader must publish its timestamp so GC keeps the versions
  *  it needs. Naive order [ts = clock.get(); slot.set(ts)] is broken: the
  *  thread can stall between the two, GC misses it, and prunes versions
@@ -46,7 +46,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *  Pruning keeps every version with commitTs > B plus the newest one
  *  with commitTs <= B -- exactly what any reader with ts >= B can need.
  *
- * CONSISTENCY (design doc E2): snapshot queries are consistent
+ * CONSISTENCY (see the report's limitations): snapshot queries are consistent
  * (they observe the committed state at their timestamp) but the whole
  * structure provides snapshot-isolation-style guarantees, not strict
  * linearizability of snapshots vs. the fast path. insert/remove/contains
