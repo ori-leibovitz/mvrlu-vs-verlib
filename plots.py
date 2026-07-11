@@ -33,7 +33,7 @@ fig, ax = plt.subplots(figsize=(6, 4))
 sub = df[(df["size"] == 1024) & (df["mix"] == "read_heavy")]
 for impl in ["coarse", "mvrlu", "vcas"]: line(ax, sub, impl)
 style(ax, "Read-heavy (90/5/5), 1K elements: versioning scales, the lock does not", logy=True)
-ax.annotate("35.7x", xy=(64, 14.02), xytext=(20, 6),
+ax.annotate("~34x", xy=(64, 14.02), xytext=(20, 6),
             arrowprops=dict(arrowstyle="->", alpha=0.6), fontsize=10)
 fig.tight_layout(); fig.savefig("fig1_read_heavy_scaling.png", dpi=200); plt.close(fig)
 
