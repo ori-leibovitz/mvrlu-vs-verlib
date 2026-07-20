@@ -39,7 +39,7 @@ public final class Benchmark {
 
     // ---- experiment matrix (edit + recompile to trim) ----
     static final String[] IMPLS   = { "coarse", "mvrlu", "vcas", "mvrlu-tree", "vcas-tree" };
-    static final int[]    THREADS = { 1, 8, 32, 64 };
+    static final int[]    THREADS = { 1, 2, 4, 8, 16, 24, 32, 48, 64 };
     static final int[]    SIZES   = { 1024, 16384 };
     static final int      REPS        = 3;
     static final int      WARMUP_MS   = 1500;
